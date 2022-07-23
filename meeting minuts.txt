@@ -1,2 +1,0 @@
-Configratuion sections
-could be check boxes, labels, file uploads as well 

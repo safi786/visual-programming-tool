@@ -1,2 +1,0 @@
-The value of x after swapping: 10
-The value of y after swapping: 5
