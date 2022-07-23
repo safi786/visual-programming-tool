@@ -1,0 +1,103 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% block content %}
+
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Project Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Project</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% if form.errors %}
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        <div class="alert alert-danger alert-dismissible fade show"
+                                             role="alert">
+                                            <strong>{{ error|escape }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                                {% for error in form.non_field_errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show"
+                                         role="alert">
+                                        <strong>{{ error|escape }}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                                aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="name">{{form.name.label}}</label>
+                                    {{form.name}}
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="authot">{{form.author.label}}</label>
+                                    {{form.author}}
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">{{form.description.label}}</label>
+                                    {{form.description}}
+                            </div>
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label for="inputStatus">Status</label>-->
+                            <!--                            <select id="inputStatus" class="form-control custom-select">-->
+                            <!--                                <option >Select one</option>-->
+                            <!--                                <option selected>Success</option>-->
+                            <!--                            </select>-->
+                            <!--                        </div>-->
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Save Changes" class="btn btn-success float-right">
+                </div>
+            </div>
+        </form>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}

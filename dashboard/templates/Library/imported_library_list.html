@@ -1,0 +1,192 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Libraries</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Libraries</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Libraries</h3>
+
+
+
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-striped projects">
+                    <thead>
+                    <tr>
+                        <th style="width: 1%">
+                            #
+                        </th>
+                        <th style="width: 23%">
+                            Library Name
+                        </th>
+                        <th style="width: 23%" class="text-center">
+                            Author
+                        </th>
+                        <th style="width: 23%" class="text-center">
+                            Actions
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in libraries %}
+                    <tr>
+                        <td>
+                            {{ forloop.counter }}
+                        </td>
+                        <td>
+                            <a>
+                                {{i.name}}
+                            </a>
+                        </td>
+                        <td>
+                            <ul class="list-inline" style="text-align: center;">
+                                <li class="list-inline-item">
+                                    <img alt="Avatar" class="table-avatar" src="{% static 'dist/img/avatar.png' %}"> <a>
+                                    {{i.author}}
+                                </a>
+                                </li>
+
+                            </ul>
+                        </td>
+                        <td class="project-actions text-right">
+                            <a class="btn btn-primary btn-sm" href="{% url 'library' i.id  %}">
+                                <i class="fas fa-folder">
+                                </i>
+                                View
+                            </a>
+                            <a class="btn btn-success btn-sm" href="{% url 'run' i.id  %}">
+                                <i class="fas fa-play">
+                                </i>
+                                Run
+                            </a>
+                            <a class="btn btn-info btn-sm" href="{% url 'library-update' i.id  %}">
+                                <i class="fas fa-pencil-alt">
+                                </i>
+                                Edit
+                            </a>
+                            <a class="btn btn-danger btn-sm" href="{% url 'library-delete' i.id  %}">
+                                <i class="fas fa-trash">
+                                </i>
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <button class="btn page-link">
+                            <a href="?page=1">&laquo; first</a>
+                            </button>
+
+                        </li>
+                        <li class="page-item">
+                            <button class="btn page-link"> <a href="?page={{ page_obj.previous_page_number }}"> Previous</a></button>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <button disabled  class="btn page-link"> &laquo; first</a></button>
+                        </li>
+                        <li  class="page-item">
+                            <button disabled class="btn page-link" > Previous </a></button>
+                        </li>
+                        {% endif %}
+                        <li class="current">
+                            <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                        </li>
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <button class="btn page-link" ><a href="?page={{ page_obj.next_page_number }}">next</a></button>
+                        </li>
+                        <li class="page-item">
+                            <button class="btn page-link" ><a href="?page={{ page_obj.paginator.num_pages }}"> last &raquo;</a></button>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <button disabled class="btn" >next</button>
+                        </li>
+                        <li class="page-item">
+                            <button disabled class="btn" >last &raquo;</button>
+                        </li>
+                        {% endif %}
+
+                        </li>
+                    </ul>
+                </nav>
+<!--                <div class="pagination">-->
+<!--                    <span class="step-links">-->
+<!--                        {% if page_obj.has_previous %}-->
+<!--                            <a href="?page=1">&laquo; first</a>-->
+<!--                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>-->
+<!--                        {% else %}-->
+<!--                            <a href="?page=1">&laquo; first</a>-->
+<!--                        {% endif %}-->
+
+<!--                        <span class="current">-->
+<!--                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.-->
+<!--                        </span>-->
+
+<!--                        {% if page_obj.has_next %}-->
+<!--                            <a href="?page={{ page_obj.next_page_number }}">next</a>-->
+<!--                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>-->
+<!--                        {% endif %}-->
+<!--                    </span>-->
+<!--                </div>-->
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+<script>
+<!--function httpGetAsync(theUrl, callback)-->
+<!--{-->
+<!--    var xmlHttp = new XMLHttpRequest();-->
+<!--    xmlHttp.onreadystatechange = function() {-->
+<!--        if (xmlHttp.readyState == 4 && xmlHttp.status == 200)-->
+<!--            callback(xmlHttp.responseText);-->
+<!--    }-->
+<!--    xmlHttp.open("GET", theUrl, true); // true for asynchronous-->
+<!--    xmlHttp.send(null);-->
+<!--}-->
+<!--theUrl = "http://127.0.0.1:8000/run/1/";-->
+<!--httpGetAsync(theUrl)-->
+
+
+
+
+
+
+
+</script>
+{% endblock %}

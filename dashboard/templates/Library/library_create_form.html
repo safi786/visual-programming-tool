@@ -1,0 +1,140 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% block content %}
+{% load myfilters %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Library Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Library</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                {{ form.non_field_errors }}
+                                <div class="form-group col-6">
+
+                                    <div class="fieldWrapper">
+                                        {{ form.name.errors }}
+                                        {{ form.name.label_tag }}
+                                        {{ form.name|addclass:'form-control' }}
+                                        <span class="helptext">{{ form.name.help_text }}</span>
+                                    </div>
+                                </div>
+                                <div class="form-group col-6">
+                                    <div class="fieldWrapper">
+                                        {{ form.category_tag.errors }}
+                                        {{ form.category_tag.label_tag }}
+                                        {{ form.category_tag|addclass:'form-control'}}
+                                        <span class="helptext">{{ form.category_tag.help_text }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group ">
+                                <div class="fieldWrapper">
+                                    {{ form.code.errors }}
+                                    {{ form.code.label_tag }}
+                                    {{ form.code|addclass:'form-control' }}
+                                    <span class="helptext">{{ form.code.help_text }}</span>
+                                </div>
+                            </div>
+                            <div class="form-group col-4">
+                                <div class="fieldWrapper">
+                                    {{ form.public_access.label_tag}}
+                                    {{ form.public_access}}
+                                </div>
+                            </div>
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label for="inputStatus">Status</label>-->
+                            <!--                            <select id="inputStatus" class="form-control custom-select">-->
+                            <!--                                <option >Select one</option>-->
+                            <!--                                <option selected>Success</option>-->
+                            <!--                            </select>-->
+                            <!--                        </div>-->
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Select Provides</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Select Depends</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Create" class="btn btn-success float-right">
+                </div>
+            </div>
+        </form>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}

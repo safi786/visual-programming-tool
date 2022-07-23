@@ -1,0 +1,71 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% load myfilters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Create Library</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Library</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <section class="content">
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header" style="background-color: #58789b;">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            {% crispy form %}
+
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-secondary">Cancel</a>
+                    <input type="submit" value="Submit" class="btn btn-success float-right">
+                </div>
+            </div>
+        </form>
+    </section>
+</div>
+<script src="{% static 'libs/codemirror/codemirror.js' %}"></script>
+<link rel="stylesheet" href="{% static 'libs/codemirror/codemirror.css' %}">
+<link rel="stylesheet" href="{% static 'theme/mdn-like.css' %}">
+<script src="{% static 'mode/javascript/javascript.js' %}"></script>
+<script>
+
+    var myCodeMirror = CodeMirror(function (elt) {
+        code.parentNode.replaceChild(elt, code)
+    }, {
+        mode: "python",
+        theme: "mdn-like",
+        lineNumbers: true,
+        readOnly: false,
+
+    });
+
+    var html = `{{library.code |escapejs }}`;
+    myCodeMirror.setValue(html)
+</script>
+{% endblock %}

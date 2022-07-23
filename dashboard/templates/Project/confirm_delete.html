@@ -1,0 +1,56 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% load myfilters %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Please Confirm!</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Project</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="container-fluid">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="card-body">
+                                    <form method="post">{% csrf_token %}
+                                        <p>Are you sure you want to delete "{{ object }}"?</p>
+                                        <input type="submit" value="Confirm">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+{% endblock %}

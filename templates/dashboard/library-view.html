@@ -1,0 +1,216 @@
+{%  extends 'dashboard/index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Library Details</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Project</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Library</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-6">
+                                <label for="inputName">Name</label>
+                                <input type="text" id="inputName" class="form-control" disabled
+                                       value="{{library.name}}">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="inputClientCompany">Author</label>
+                                <input disabled type="text" id="inputClientCompany" class="form-control"
+                                       value="{{library.author}}">
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="inputDescription">Code</label>
+                            <textarea id="code" disabled class="form-control" rows="10">{{library.code}}.</textarea>
+                        </div>
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">Configurations</h3>
+
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped projects">
+                            <thead>
+                            <tr>
+                                <th >
+                                    Variable name
+                                </th>
+                                <th >
+                                    Value
+                                </th>
+                                <th >
+                                    Type
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for i in config_vars %}
+                            <tr>
+                                <td>
+                                    <a>
+                                        {{i.name}}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{i.value}}
+                                </td>
+                                <td>
+                                    {{i.type}}
+                                </td>
+<!--                                <td class="project-actions text-right">-->
+<!--                                    <a class="btn btn-primary btn-sm" href="{% url 'library' i.id  %}">-->
+<!--                                        <i class="fas fa-folder">-->
+<!--                                        </i>-->
+<!--                                        View-->
+<!--                                    </a>-->
+<!--                                    <a class="btn btn-success btn-sm" href="{% url 'run' i.id  %}">-->
+<!--                                        <i class="fas fa-play">-->
+<!--                                        </i>-->
+<!--                                        Run-->
+<!--                                    </a>-->
+<!--                                    <a class="btn btn-info btn-sm" href="{% url 'library-update' i.id  %}">-->
+<!--                                        <i class="fas fa-pencil-alt">-->
+<!--                                        </i>-->
+<!--                                        Edit-->
+<!--                                    </a>-->
+<!--                                    <a class="btn btn-danger btn-sm" href="{% url 'library-delete' i.id  %}">-->
+<!--                                        <i class="fas fa-trash">-->
+<!--                                        </i>-->
+<!--                                        Delete-->
+<!--                                    </a>-->
+<!--                                </td>-->
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+<!--                        <nav aria-label="Page navigation example">-->
+<!--                            <ul class="pagination justify-content-center">-->
+<!--                                {% if page_obj.has_previous %}-->
+<!--                                <li class="page-item">-->
+<!--                                    <button class="btn page-link">-->
+<!--                                        <a href="?page=1">&laquo; first</a>-->
+<!--                                    </button>-->
+
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <button class="btn page-link"><a href="?page={{ page_obj.previous_page_number }}">-->
+<!--                                        Previous</a></button>-->
+<!--                                </li>-->
+<!--                                {% else %}-->
+<!--                                <li class="page-item">-->
+<!--                                    <button disabled class="btn page-link"> &laquo; first</a></button>-->
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <button disabled class="btn page-link"> Previous </a></button>-->
+<!--                                </li>-->
+<!--                                {% endif %}-->
+<!--                                <li class="current">-->
+<!--                                    <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>-->
+<!--                                </li>-->
+<!--                                {% if page_obj.has_next %}-->
+<!--                                <li class="page-item">-->
+<!--                                    <button class="btn page-link"><a-->
+<!--                                            href="?page={{ page_obj.next_page_number }}">next</a></button>-->
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <button class="btn page-link"><a href="?page={{ page_obj.paginator.num_pages }}">-->
+<!--                                        last &raquo;</a></button>-->
+<!--                                </li>-->
+<!--                                {% else %}-->
+<!--                                <li class="page-item">-->
+<!--                                    <button disabled class="btn">next</button>-->
+<!--                                </li>-->
+<!--                                <li class="page-item">-->
+<!--                                    <button disabled class="btn">last &raquo;</button>-->
+<!--                                </li>-->
+<!--                                {% endif %}-->
+
+<!--                                </li>-->
+<!--                            </ul>-->
+<!--                        </nav>-->
+
+<!--                        <div class="form-group">-->
+<!--                            <label for="inputDescription">Code</label>-->
+<!--                            <textarea id="code" disabled class="form-control" rows="10">{{library.code}}.</textarea>-->
+<!--                        </div>-->
+
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <a href="{{request.META.HTTP_REFERER|escape}}" class="btn btn-secondary">back</a>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<script src="{% static 'libs/codemirror/codemirror.js' %}"></script>
+<link rel="stylesheet" href="{% static 'libs/codemirror/codemirror.css' %}">
+<link rel="stylesheet" href="{% static 'theme/mdn-like.css' %}">
+<script src="{% static 'mode/javascript/javascript.js' %}"></script>
+<script>
+
+    var myCodeMirror = CodeMirror(function (elt) {
+        code.parentNode.replaceChild(elt, code)
+    }, {
+        mode: "python",
+        theme: "mdn-like",
+        lineNumbers: true,
+        readOnly: true,
+
+    });
+
+    var html = `{{library.code |escapejs }}`;
+    myCodeMirror.setValue(html)
+</script>
+{% endblock %}

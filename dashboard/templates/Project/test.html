@@ -1,0 +1,125 @@
+<div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">General</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="row">
+                                {{ form.non_field_errors }}
+                                <div class="form-group col-6">
+
+                                    <div class="fieldWrapper">
+                                        {{ form.name.errors }}
+                                        {{ form.name.label_tag }}
+                                        {{ form.name|addclass:'form-control' }}
+                                        <span class="helptext">{{ form.name.help_text }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="fieldWrapper">
+                                    {{ form.description.errors }}
+                                    {{ form.description.label_tag }}
+                                    {{ form.description|addclass:'form-control' }}
+                                    <span class="helptext">{{ form.description.help_text }}</span>
+                                </div>
+                            </div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                                    data-target="#exampleModal">
+                                Add Libraries
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Select Library</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            {{form}}
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--                        <div class="form-group">-->
+                            <!--                            <label for="inputStatus">Status</label>-->
+                            <!--                            <select id="inputStatus" class="form-control custom-select">-->
+                            <!--                                <option >Select one</option>-->
+                            <!--                                <option selected>Success</option>-->
+                            <!--                            </select>-->
+                            <!--                        </div>-->
+
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <div class="col-md-12">
+                    <!-- /.card -->
+                    <div class="card card-info">
+                        <div class="card-header">
+                            <h3 class="card-title">Files</h3>
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body p-0">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>Library Name</th>
+                                    <th>Library Author</th>
+                                    <th>Running Order</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for i in program %}
+                                <tr>
+
+                                    <td>{{i.library.name}}</td>
+                                    <td>{{i.library.author}}</td>
+                                    <td>{{i.orderNumber}}</td>
+                                    <td class="text-right py-0 align-middle">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="{% url 'library' i.library.id  %}" class="btn btn-info"><i
+                                                    class="fas fa-eye"></i></a>
+                                            <a href="{% url 'libraryEdit' i.library.id  %}" class="btn btn-secondary"><i
+                                                    style="color: white;" class="fas fa-edit"></i></a>
+                                            <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
